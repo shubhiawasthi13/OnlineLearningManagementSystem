@@ -1,0 +1,144 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+/* navbar css */
+.custom_logo{
+    color: white;
+    padding-right: 20px;
+}
+
+.custom_nav_item:hover{
+    background-color: rgb(0, 38, 255);
+    border: 1px solid rgb(0, 38, 255);
+    border-radius: 10px;
+}
+/* home section css */
+.custom_home{
+    margin: 0;
+    padding: 0;
+}
+.vid_parent{
+    position: relative;
+}
+video{
+    width: 100%;
+    height: 100%;
+}
+.vid_overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color:grey;
+    z-index: 1;
+    opacity: 0.4;
+}
+.vid_content{
+    position: absolute;
+    z-index: 2;
+    top: 35%;
+    left: 34%;
+    text-align: center;
+    color: white;
+}
+/* contact card css */
+.contact_card{
+    box-shadow: 0 0 40px blue;
+    transform: rotate(10deg);
+    height: 15rem;
+    padding: 1rem;
+}
+#testimonial-slider {
+    width: 95%;
+    margin: 40px auto;
+}
+  
+  .testimonial {
+    text-align: center;
+  }
+  
+  .testimonial img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 20px;
+  }
+  
+  .testimonial p {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .carousel-inner {
+    padding: 50px;
+  }
+  
+  .carousel-control-prev, .carousel-control-next {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(87, 87, 87);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+  }
+  
+  .carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgb(7, 73, 255);
+  }
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* media query start here */
+@media screen and (min-width:0px) and (max-width:700px){
+    .custom_nav{
+        background-color:rgb(65, 65, 65);
+        padding: 20px;
+    }
+    .custom_nav_item:hover{
+        background-color: transparent;
+        border: none;
+    }
+    .my_content{
+        display: none;
+    }
+    .txt_banner{
+        display: none;
+    }
+    .vid_content{
+        top: 12%;
+        left: 40%;
+    }
+
+    .contact_card{
+        transform: none;
+       
+    }
+}
