@@ -1,3 +1,6 @@
+<?php
+include("./database/connection.php");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,93 +25,32 @@ include("./header.php")
         </div>
     </div>
 
-    <div class="container mt-5">
+ <div class="container mt-5">
    <h1 class="text-center">All Course</h1>
-  <!-- 1st card row -->
+   <!-- 1st card row -->
+   <?php
+       $sql = "SELECT * FROM course";
+      $result = mysqli_query($conn, $sql);
+
+    ?>
   <div class="row">
+  <?php foreach($result as $course){?>
     <div class="col-md-4 mt-4">
         <div class="card">
-          <img src="images/python.webp" class="card-img-top" alt="python"/>
+          <img src="<?php echo str_replace('..', '.',$course['course_img']);?>" class="card-img-top" style="height:200px" alt=""/>
            <div class="card-body">
-            <h5 class="card-title">Learn python</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, rerum.</p>
+            <h5 class="card-title"><?php echo $course['course_name']?> Course</h5>
+            <p class="card-text"> <?php echo $course['course_desc'] ?></p>
            </div>
           <div class="card-footer">
-            <p class="card-text d-inline">Price: <small><del>&#8377 2000</del></small> <span class="font-weight-bolder">&#8377 200</span></p>
-            <a href="#" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
+            <p class="card-text d-inline">Price: <small><del>&#8377  <?php echo $course['course_org_price']; ?></del></small> <span class="font-weight-bolder">&#8377 <?php echo $course['course_price']?></span></p>
+            <a href="course_detail.php?course_id='<?php echo $course["course_id"];?>'" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
           </div>
         </div>
-    </div>
-    <div class="col-md-4 mt-4">
-        <div class="card">
-          <img src="images/python.webp" class="card-img-top" alt="python"/>
-          <div class="card-body">
-            <h5 class="card-title">Learn python</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, rerum.</p>
-          </div>
-          <div class="card-footer">
-            <p class="card-text d-inline">Price: <small><del>&#8377 2000</del></small> <span class="font-weight-bolder">&#8377 200</span></p>
-            <a href="#" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
-          </div>
-        </div>
-    </div>
-    <div class="col-md-4 mt-4">
-        <div class="card">
-          <img src="images/python.webp" class="card-img-top" alt="python"/>
-          <div class="card-body">
-            <h5 class="card-title">Learn python</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, rerum.</p>
-          </div>
-          <div class="card-footer">
-            <p class="card-text d-inline">Price: <small><del>&#8377 2000</del></small> <span class="font-weight-bolder">&#8377 200</span></p>
-            <a href="#" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
-          </div>
-        </div>
-    </div>
+     </div>
+     <?php } ?>  
   </div>
-    <!-- 2nd card row -->
-  <div class="row">
-    <div class="col-md-4 mt-4">
-        <div class="card">
-          <img src="images/react.jpg" class="card-img-top" alt="python"/>
-          <div class="card-body">
-            <h5 class="card-title">Learn React</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, rerum.</p>
-          </div>
-          <div class="card-footer">
-            <p class="card-text d-inline">Price: <small><del>&#8377 2000</del></small> <span class="font-weight-bolder">&#8377 200</span></p>
-            <a href="#" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
-          </div>
-        </div>
-    </div>
-    <div class="col-md-4 mt-4">
-        <div class="card">
-        <img src="images/react.jpg" class="card-img-top" alt="python"/>
-          <div class="card-body">
-            <h5 class="card-title">Learn React</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, rerum.</p>
-          </div>
-          <div class="card-footer">
-            <p class="card-text d-inline">Price: <small><del>&#8377 2000</del></small> <span class="font-weight-bolder">&#8377 200</span></p>
-            <a href="#" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
-          </div>
-        </div>
-    </div>
-    <div class="col-md-4 mt-4">
-        <div class="card">
-        <img src="images/react.jpg" class="card-img-top" alt="python"/>
-          <div class="card-body">
-            <h5 class="card-title">Learn React</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, rerum.</p>
-          </div>
-          <div class="card-footer">
-            <p class="card-text d-inline">Price: <small><del>&#8377 2000</del></small> <span class="font-weight-bolder">&#8377 200</span></p>
-            <a href="#" class="btn btn-primary text-white float-right font-weight-bolder">Enroll</a>
-          </div>
-        </div>
-    </div>
-  </div>
-</div>
+
 <?php
 include("./footer.php")
 ?>
