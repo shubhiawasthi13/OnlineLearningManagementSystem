@@ -75,7 +75,17 @@ border-radius: .5rem;
     font-size: 1.2rem;
     color: rgb(48, 47, 47);
 }
- 
+
+label{
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+input{
+    padding: 5px;
+    margin-bottom: 7px;
+}
+
+
 
 
 
