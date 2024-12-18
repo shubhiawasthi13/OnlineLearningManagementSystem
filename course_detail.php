@@ -28,6 +28,8 @@ include("./header.php")
    $sql = "SELECT * FROM course WHERE course_id = $course_id";
    $result = mysqli_query($conn, $sql);
    $row = mysqli_fetch_assoc($result);
+
+   
  }
  ?>
 <div class="container-fluid bg-dark">
@@ -52,7 +54,7 @@ include("./header.php")
           <div class="card-footer">
             <form action="checkout.php" action ="post">
              <p class="card-text d-inline">Price: <small><del>&#8377 <?php echo $row['course_org_price'];?></del></small> <span class="font-weight-bolder">&#8377 <?php echo $row['course_price'];?></span></p>
-             <input type="hidden" name="id" value="<?php echo $row['course_price'];?>">
+             <input type="hidden" name="price" value="<?php echo $row['course_price'];?>">
                 <input type="submit" class="btn btn-primary text-white float-right font-weight-bolder" value="Buy Now">
             </form>
 
