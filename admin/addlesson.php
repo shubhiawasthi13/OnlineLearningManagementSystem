@@ -37,18 +37,16 @@ if(!isset($_SESSION['admin_email'])){
             <li class="pt-3"><a href="courses.php">Courses</a></li>
             <li class="pt-3"><a href="lessons.php" class="active_link">Lessons</a></li>
             <li class="pt-3"><a href="students.php" class="">Students</a></li>
-            <li class="pt-3"><a href="admin.php" class="">Sell Report</a></li>
-            <li class="pt-3"><a href="admin.php" class="">Payment Status</a></li>
+            <li class="pt-3"><a href="payment_status.php" class="">Payment Status</a></li>
             <li class="pt-3"><a href="change_pass.php" class="">Change Paasword</a>
             <li class="pt-3"><a href="../logout.php" class="">Logout</a>  </li>
           </ul>
         </div>
         <div class="col-md-6 mt-5">
-            <div class="container p-5" style="background-color: rgb(209, 205, 205);">
+         <div class="container p-5" style="background-color: rgb(209, 205, 205);">
                 <h4 class="text-center pt-4">Add New Lesson</h4>
-             <form action="" method="post" enctype="multipart/form-data">
-            
-             <label for="">Course Id</label>
+           <form action="" method="post" enctype="multipart/form-data">
+                <label for="">Course Id</label>
                 <br>
                 <input type="text"  class ="p-1" name ="course_id" style="width:95%" value="<?php echo $_SESSION['course_id'];?>" readonly>
                 <br><br>
@@ -72,8 +70,8 @@ if(!isset($_SESSION['admin_email'])){
                 <button type= "submit" name="lesson_submit" class="btn btn-primary text-white p-2">Submit</button>
                 <a href="lessons.php" class="btn btn-secondary text-white p-2">Close</a>
                 </center>
-            </form>
-            </div>
+           </form>
+         </div>
         </div>
     </div>
 </div>
@@ -94,7 +92,7 @@ if(isset($_POST['lesson_submit'])){
         $course_name = $_POST['course_name'];
         $lesson_link = $_FILES['lesson_link']['name'];
         $lesson_link_temp = $_FILES['lesson_link']['tmp_name'];
-        $link_folder = '../lessionvid/'.$lesson_link;
+        $link_folder = '../lesson_videos/'.$lesson_link;
         move_uploaded_file($lesson_link_temp, $link_folder);
 
         $sql = "INSERT INTO lesson (lesson_name,lesson_desc,lesson_link,course_id,course_name) VALUES ('$lesson_name','$lesson_desc','$link_folder','$course_id','$course_name')";

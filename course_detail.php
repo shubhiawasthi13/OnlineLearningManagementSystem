@@ -1,6 +1,5 @@
 <?php
 include("./database/connection.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +17,13 @@ include("./database/connection.php");
 <body>
 <!-- navigation start here -->
 <?php
-include("./header.php")
+include("./header.php");
 ?>
 <!-- navigation end here -->
  <?php 
  if(isset($_GET['course_id'])){
    $course_id = $_GET['course_id'];
-   $_SESSION['course_id'] = $course_id;
+  //  $_SESSION['course_id'] = $course_id;
    $sql = "SELECT * FROM course WHERE course_id = $course_id";
    $result = mysqli_query($conn, $sql);
    $row = mysqli_fetch_assoc($result);
@@ -55,6 +54,8 @@ include("./header.php")
             <form action="checkout.php" action ="post">
              <p class="card-text d-inline">Price: <small><del>&#8377 <?php echo $row['course_org_price'];?></del></small> <span class="font-weight-bolder">&#8377 <?php echo $row['course_price'];?></span></p>
              <input type="hidden" name="price" value="<?php echo $row['course_price'];?>">
+             <input type="hidden" name="course_id" value="<?php echo $row['course_id'];?>">
+             <input type="hidden" name="course_name" value="<?php echo $row['course_name'];?>">
                 <input type="submit" class="btn btn-primary text-white float-right font-weight-bolder" value="Buy Now">
             </form>
 

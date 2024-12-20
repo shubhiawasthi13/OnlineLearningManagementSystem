@@ -21,9 +21,6 @@
                   <li class="nav-item custom_nav_item">
                     <a class="nav-link text-white" href="courses.php">Courses</a>
                   </li>
-                  <li class="nav-item custom_nav_item">
-                    <a class="nav-link text-white" href="payment.php">Payment Status</a>
-                  </li>
                   <?php
                   session_start();
                   if(isset($_SESSION['email'])){

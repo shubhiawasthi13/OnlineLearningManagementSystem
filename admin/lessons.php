@@ -37,8 +37,7 @@ if(!isset($_SESSION['admin_email'])){
             <li class="pt-3"><a href="courses.php" class="">Courses</a></li>
             <li class="pt-3"><a href="lessons.php" class="active_link">Lessons</a></li>
             <li class="pt-3"><a href="students.php" class="">Students</a></li>
-            <li class="pt-3"><a href="admin.php" class="">Sell Report</a></li>
-            <li class="pt-3"><a href="admin.php" class="">Payment Status</a></li>
+            <li class="pt-3"><a href="payment_status.php" class="">Payment Status</a></li>
             <li class="pt-3"><a href="change_pass.php" class="">Change Paasword</a></li>
            <li class="pt-3"><a href="../logout.php" class="">Logout</a>  </li>
           </ul>

@@ -23,32 +23,46 @@ if(!isset($_SESSION['email'])){
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      <!-- custom css here -->
     <link rel="stylesheet" href="css/custom.css">
-<body>
-    <h2 class="text-center mt-4">Payment Page</h2>
+
+<body style="background-color: rgb(211, 209, 209)">
     <div class="container">
-        <div class="row">
-            <center>
-            <div class="col-md-6">
-               <form action="" style="background-color: rgb(187, 187, 187)" class="p-3" method="post">
-                <label for="">OrderID</label>
+               <h2 class="text-center mt-4">Payment Page</h2>  
+             <div class="row">
+              <center>
+                <div class="col-md-4">
+                <form action="" style="background-color: rgb(243, 239, 239)" class="p-3" method="post">
+                  <div class="row">
+                    <div class="col-sm-2 pb-3">
+                    <a href="courses.php">cancel></a>
+                    </div>
+                  </div>
+                <div class="row">
+                 <div class="col-sm-4">
+                  <span>Order Id:</span>
+                  <input type="text" value="<?php echo "ORD" . rand(10000,99999999) ?>" name ="order_id" style="border:none; background-color: rgb(243, 239, 239)">
+                   <br>
+                 </div>
+                 <div class="col-sm-8">
+                 <h6><?php echo "Course: ".$_GET['course_name']?></h6>
+                  <h6 class="text-success"><?php echo "Amount: ".$_GET['price']."rs"?></h6>
+                 </div>
+                </div>
+                <hr>
                 <br>
-                <input type="text" name ="order_id" value="<?php echo "ORDS" . rand(10000,99999999)?>" style="width:60%;" readonly>
-                <br>
-                <label for="">Email</label>
-                <br>
-                <input type="email" name ="stu_email" value="<?php echo $_SESSION['email'];?>" style="width:60%;" readonly>
-                <br>
-                <label for="">Amount</label>
-                <br>
-                <input type="text" name ="amount" value="<?php echo $_GET['price'];?>" style="width:60%;" readonly>
-                <br> <br>
-                
+                <div class="row">
+                  <div class="col-sm-5">
+                  <input type="radio" name="payoption" value="creditcard"> Credit Card <br><br>
+                  <input type="radio" name="payoption" value="debitcard"> Debit Card<br><br>
+                  <input type="radio" name="payoption" value="netbanking"> Net Banking
+                  </div>
+                </div>
+                <hr>
+                <br><br>
                 <input type ="submit" name="pay_amount" class="btn btn-primary" value="pay now">
-                <a href="courses.php" class="btn btn-dark">Cancel</a>
                </form>
+              </div>
+                </center>
             </div>
-            </center>
-        </div>
     </div>
 </body>
 
@@ -66,17 +80,18 @@ if(!isset($_SESSION['email'])){
 <?php
 if(isset($_POST['pay_amount'])){
   $order_id = $_POST['order_id'];
-  $course_id = $_SESSION['course_id'];
+  $course_id = $_GET['course_id'];
   $stu_email = $_SESSION['email'];
-  $course_amount = $_POST['amount'];
+  $course_amount = $_GET['price'];
+  $pay_option =$_POST['payoption'];
   $status = "success";
   
-  $insert_query = "INSERT INTO courseorder (order_id, course_id, stu_email, amount, status) VALUES ('$order_id', '$course_id','$stu_email', '$course_amount', $status)";
+  $insert_query = "INSERT INTO courseorder (order_id, course_id, stu_email, amount, payoption, ord_status) VALUES ('$order_id', '$course_id', '$stu_email', '$course_amount', '$pay_option', '$status')";
   $result = mysqli_query($conn, $insert_query);
 
   if($result){
     echo "<script>alert('Payment successfully')</script>";
-    echo "<script>location.href='./students/stu_profile.php'</script>";
+    echo "<script>location.href='./students/stu_course.php'</script>";
   }else{
     echo "<script>alert('Payment failed')</script>";
   }

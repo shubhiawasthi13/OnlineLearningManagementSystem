@@ -34,73 +34,56 @@ if(!isset($_SESSION['admin_email'])){
          <div class="col-md-2 mt-5 side_nav">   
           <ul>
             <li class="pt-3"><a href="admin.php" class="">DASHBOARD</a></li>
-            <li class="pt-3"><a href="courses.php" class="">Courses</a></li>
+            <li class="pt-3"><a href="courses.php">Courses</a></li>
             <li class="pt-3"><a href="lessons.php" class="">Lessons</a></li>
-            <li class="pt-3"><a href="students.php" class="active_link">Students</a></li>
-            <li class="pt-3"><a href="payment_status.php" class="">Payment Status</a></li>
+            <li class="pt-3"><a href="students.php" class="">Students</a></li>
+            <li class="pt-3"><a href="payment_status.php" class="active_link">Payment Status</a></li>
             <li class="pt-3"><a href="change_pass.php" class="">Change Paasword</a>
             <li class="pt-3"><a href="../logout.php" class="">Logout</a>  </li>
           </ul>
         </div>
-        <div class="col-md-10 mt-5">
-              <!-- heading start here -->
-             <div class="container-fluid mt-5">
-              <h6 class="text-center text-white bg-dark p-2">List of Students</h6>
-             </div>
-              <!-- heading end here -->
+         <div class="col-md-6">
+           <h4 class="text-center"></h4>
+           <form action="" class="p-5" method="get">
+                <label for="" class=" fs-5">Enter Order ID:</label>
+                <br>
+                <input type="text" name="order_id" class="p-1 d-inline" style="width:40%">
+                <button type="submit" name="search" class="btn btn-dark">Search</button>
+             </form>
 
-             <!-- table start here -->
-             <div class="container">
-              <table class="table">
+             <?php
+              if(isset($_GET['search'])){
+                $order_id =$_GET['order_id'];
+                $sql = "SELECT * FROM courseorder WHERE order_id = '$order_id'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+
+              ?>
+                <table class="table">
                 <thead>
                 <tr>
-                 <th scope="col">Student Id</th>
-                 <th scope="col">Name</th>
-                 <th scope="col">Email</th>
-                 <th scope="col">Action</th>
+                 <th scope="col">Order Id</th>
+                 <th scope="col">Amount</th>
+                 <th scope="col">Payement Option</th>
+                 <th scope="col">Payment Status</th>
                 </tr>
                </thead>
                <tbody>
+                 <tr <?php foreach($result as $pay){?>>
+                  <td><?php  if(isset($pay['order_id'])) {echo $pay['order_id'];}?></td>
+                  <td><?php  if(isset($pay['amount'])) {echo $pay['amount'];}?></td>
+                  <td><?php  if(isset($pay['payoption'])) {echo $pay['payoption'];}?></td>
+                  <td><?php  if(isset($pay['ord_status'])) {echo $pay['ord_status'];}?></td>
 
-               <?php
-                $sql = "SELECT * FROM students";
-                $result = mysqli_query($conn, $sql);
-                ?>
-                 <tr <?php foreach($result as $stu_data){?>>
-                  <td><?php echo $stu_data['id'];?></td>
-                  <td><?php echo $stu_data['name'];?></td>
-                  <td><?php echo $stu_data['email'];?></td>
-                  <td>
-                     <form method="post">
-                      <input type="hidden" name ="stu_id" value ="<?php echo $stu_data['id'];?>">
-                      <button type="submit" name = "delete" value="delete" class="p-1 bg-danger"><i class="fa-solid fa-trash"></i></button>
-                    </form>
-                  </td>
                  </tr <?php }?>>
                </tbody>
             </table>
-           </div>
-            <!-- table end here -->
-        </div>
+            <?php } ?>
+         </div>
     </div>
 </div>
-
-
 </body>
 </html>
-<?php  
-}
-?>
 <?php
-if(isset($_POST['delete'])){
-  $stu_id = $_POST['stu_id'];
-  $sql = "DELETE FROM students WHERE id ='$stu_id'";
-  $result = mysqli_query($conn, $sql);
-  if($result){
-    echo "<script>alert('student deleted successfully')</script>";
-    echo "<script>location.href='students.php'</script>";
-  }else{
-    echo "<script>alert('failed')</script>";
-  }
 }
 ?>

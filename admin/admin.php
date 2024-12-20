@@ -37,29 +37,43 @@ if(!isset($_SESSION['admin_email'])){
             <li class="pt-3"><a href="courses.php" class="">Courses</a></li>
             <li class="pt-3"><a href="lessons.php" class="">Lessons</a></li>
             <li class="pt-3"><a href="students.php" class="">Students</a></li>
-            <li class="pt-3"><a href="admin.php" class="">Sell Report</a></li>
-            <li class="pt-3"><a href="admin.php" class="">Payment Status</a></li>
+            <li class="pt-3"><a href="payment_status.php" class="">Payment Status</a></li>
             <li class="pt-3"><a href="change_pass.php" class="">Change Paasword</a></li>
            <li class="pt-3"><a href="../logout.php" class="">Logout</a>  </li>
           </ul>
         </div>
+              <?php
+               $sql = "SELECT * FROM course";
+               $result = mysqli_query($conn, $sql);
+               $total_course = mysqli_num_rows($result);
+
+               $sql = "SELECT * FROM students";
+               $result = mysqli_query($conn, $sql);
+               $total_stu = mysqli_num_rows($result);
+
+               $sql = "SELECT * FROM courseorder";
+               $result = mysqli_query($conn, $sql);
+               $total_order = mysqli_num_rows($result);
+              ?>
+
+
         <div class="col-md-10 mt-5">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-3 bg-danger box p-5">
                 <h5 class="text-center text-white">Courses</h5>
-                <p class="text-center text-white">8</p>
-                <center><a href="#" class="text-white">View</a></center>
+                <p class="text-center text-white"><?php echo $total_course; ?></p>
+                <center><a href="courses.php" class="text-white">View</a></center>
               </div>
               <div class="col-md-3 bg-success box p-5">
                 <h5 class="text-center text-white">Students</h5>
-                <p class="text-center text-white">12</p>
-                <center><a href="#" class="text-white">View</a></center>
+                <p class="text-center text-white"><?php echo $total_stu; ?></p>
+                <center><a href="students.php" class="text-white">View</a></center>
               </div>
               <div class="col-md-3 bg-primary box p-5">
                 <h5 class="text-center text-white">Sold</h5>
-                <p class="text-center text-white">5</p>
-                <center><a href="#" class="text-white">View</a></center>
+                <p class="text-center text-white"><?php echo $total_order; ?></p>
+                <center><a href="admin.php" class="text-white">View</a></center>
               </div>
             </div>
               <!-- heading start here -->
@@ -76,20 +90,25 @@ if(!isset($_SESSION['admin_email'])){
                  <th scope="col">Order Id</th>
                  <th scope="col">Course Id</th>
                  <th scope="col">Student Email</th>
-                 <th scope="col">Order Date</th>
                  <th scope="col">Amount</th>
-                 <th scope="col">Action</th>
+                 <th scope="col">Status</th>
                 </tr>
                </thead>
                <tbody>
+                <?php
+                  $sql = "SELECT * FROM courseorder";
+                  $result = mysqli_query($conn, $sql);
+
+                ?>
+                  <?php foreach($result as $order){?>
                  <tr>
-                  <td>ORD123</td>
-                  <td>10</td>
-                  <td>riya@gmail.com</td>
-                  <td>2019-02-10</td>
-                  <td>800</td>
-                  <td><a href="#"><i class="fa-solid fa-trash"></i></a></td>
+                  <td><?php echo $order['order_id']?></td>
+                  <td><?php echo $order['course_id']?></td>
+                  <td><?php echo $order['stu_email']?></td>
+                  <td><?php echo $order['amount']?></td>
+                  <td><?php echo $order['ord_status']?></td>
                  </tr>
+                 <?php } ?>
                </tbody>
             </table>
            </div>
