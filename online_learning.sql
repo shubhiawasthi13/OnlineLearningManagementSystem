@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 02:10 PM
+-- Generation Time: Dec 20, 2024 at 03:05 PM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.1.25
 
@@ -44,6 +44,27 @@ INSERT INTO `adminn` (`admin_id`, `admin_name`, `admin_email`, `admin_password`)
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `con_id` int(11) NOT NULL,
+  `con_name` varchar(155) NOT NULL,
+  `con_subject` varchar(255) NOT NULL,
+  `con_email` text NOT NULL,
+  `con_message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`con_id`, `con_name`, `con_subject`, `con_email`, `con_message`) VALUES
+(1, 'vijay', 'course detail', 'vijay@gmail.com', 'i want to ask detail about course');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `course`
 --
 
@@ -69,6 +90,30 @@ INSERT INTO `course` (`course_id`, `course_name`, `course_desc`, `course_author`
 (12, 'PHP', 'Best for web development', 'Sudesh Sahil', '10 days', 700, 2000, '../images/course_img/php.jpg'),
 (13, 'JAVA', 'learn java programming', 'Arunay Mahesh', '2 month', 460, 3900, '../images/course_img/java.jpg'),
 (14, 'Bootstrap', 'best frontend framework', 'Sudesh Sahil', '10 days', 200, 1200, '../images/course_img/boot.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courseorder`
+--
+
+CREATE TABLE `courseorder` (
+  `co_id` int(11) NOT NULL,
+  `order_id` varchar(555) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `stu_email` text NOT NULL,
+  `amount` int(11) NOT NULL,
+  `payoption` varchar(255) NOT NULL,
+  `ord_status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courseorder`
+--
+
+INSERT INTO `courseorder` (`co_id`, `order_id`, `course_id`, `stu_email`, `amount`, `payoption`, `ord_status`) VALUES
+(18, 'ORD22891435', 9, 'vinay@gmail.com', 200, 'netbanking', 'success'),
+(20, 'ORD64721285', 8, 'vinay@gmail.com', 700, 'netbanking', 'success');
 
 -- --------------------------------------------------------
 
@@ -113,9 +158,10 @@ CREATE TABLE `lesson` (
 --
 
 INSERT INTO `lesson` (`lesson_id`, `lesson_name`, `lesson_desc`, `lesson_link`, `course_id`, `course_name`) VALUES
-(1, 'introduction of react', 'cover basic react', '../lessionvid/banvid.mp4', 8, 'React'),
-(2, 'introduction of python', 'basic python', '../lessionvid/banvid.mp4', 9, 'Python'),
-(3, 'react routing', 'react routing cover', '../lessionvid/banvid.mp4', 8, 'React');
+(8, 'introduction of react', 'basic react', '../lesson_videos/banvid.mp4', 8, 'React'),
+(9, 'react routing', 'advance react', '../lesson_videos/44839-440059628_tiny (1).mp4', 8, 'React'),
+(10, 'react hook', 'cover hook', '../lesson_videos/44839-440059628_tiny.mp4', 8, 'React'),
+(11, 'react advance', 'advance', '../lesson_videos/44839-440059628_tiny.mp4', 8, 'React');
 
 -- --------------------------------------------------------
 
@@ -152,10 +198,22 @@ ALTER TABLE `adminn`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`con_id`);
+
+--
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
   ADD PRIMARY KEY (`course_id`);
+
+--
+-- Indexes for table `courseorder`
+--
+ALTER TABLE `courseorder`
+  ADD PRIMARY KEY (`co_id`);
 
 --
 -- Indexes for table `feedback`
@@ -186,10 +244,22 @@ ALTER TABLE `adminn`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `con_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
   MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `courseorder`
+--
+ALTER TABLE `courseorder`
+  MODIFY `co_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -201,7 +271,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `lesson`
 --
 ALTER TABLE `lesson`
-  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -213,3 +283,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
